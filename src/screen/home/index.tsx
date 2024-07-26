@@ -89,9 +89,12 @@ const Home = () => {
     }
   };
 
-  const brandData = selectedBrand
-    ? products.filter(item => item.brand === selectedBrand)
-    : [];
+  const brandData =
+    selectedBrand !== null
+      ? products.filter(item => item.brand === selectedBrand)
+      : [];
+
+  console.log(selectedBrand, 'v');
 
   return (
     <>

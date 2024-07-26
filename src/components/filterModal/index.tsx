@@ -14,7 +14,7 @@ type Props = {
   setData: (value: Products[]) => void;
   data: Products[];
   filterProducts: Products[] | undefined;
-  setSelectedBrand: (value: string) => void;
+  setSelectedBrand: (value: string | null) => void;
   setModalVisible: (value: boolean) => void;
   modalVisible: boolean;
   selectedBrand: string | null;
@@ -33,6 +33,7 @@ const FilterModal = ({
 
   const sortByPriceAscending = () => {
     setRadioButtonPressed(2);
+    setSelectedBrand(null);
     const sortedData: any = [...data].sort(
       (a, b) => parseFloat(a.price) - parseFloat(b.price),
     );
@@ -41,6 +42,7 @@ const FilterModal = ({
 
   const sortByPriceDescending = () => {
     setRadioButtonPressed(1);
+    setSelectedBrand(null);
     const sortedData: any = [...data].sort(
       (a, b) => parseFloat(b.price) - parseFloat(a.price),
     );
@@ -48,7 +50,11 @@ const FilterModal = ({
   };
 
   const filterByBrand = (brand: string) => {
-    setSelectedBrand(brand);
+    if (selectedBrand === brand) {
+      setSelectedBrand(null);
+    } else {
+      setSelectedBrand(brand);
+    }
   };
 
   return (
